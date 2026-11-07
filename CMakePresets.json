@@ -1,0 +1,50 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 21,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true,
+        "CO_ASYNC_ZLIB": true
+      }
+    },
+    {
+      "name": "debug",
+      "displayName": "Debug",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CO_ASYNC_DEBUG": true
+      }
+    },
+    {
+      "name": "release",
+      "displayName": "Release",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CO_ASYNC_DEBUG": false
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "debug",
+      "configurePreset": "debug",
+      "jobs": 4
+    },
+    {
+      "name": "release",
+      "configurePreset": "release",
+      "jobs": 4
+    }
+  ]
+}
